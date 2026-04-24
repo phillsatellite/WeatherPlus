@@ -1,0 +1,16 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  color: #6b7280;
+  justify-content: center;
+}
+
+[data-theme='dark'] .wrap {
+  color: #9ca3af;
+}
+
+.label {
+  font-size: 0.9rem;
+}

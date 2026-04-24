@@ -1,0 +1,75 @@
+.wrap {
+  display: inline-flex;
+  padding: 2px;
+  background: #f7f7f8;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  gap: 2px;
+}
+
+[data-theme='dark'] .wrap {
+  background: #0a0a0b;
+  border-color: #27272a;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  min-width: 36px;
+}
+
+.btn:hover {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .btn {
+  color: #9ca3af;
+}
+[data-theme='dark'] .btn:hover {
+  color: #f4f4f5;
+}
+
+.active {
+  background: #ffffff;
+  color: #1a1a1a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.active:hover {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .active {
+  background: #17171a;
+  color: #f4f4f5;
+}
+[data-theme='dark'] .active:hover {
+  color: #f4f4f5;
+}
+
+/* "hero" variant - translucent white so it reads on top of the photo. */
+.hero {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.hero .btn {
+  color: rgba(255, 255, 255, 0.75);
+}
+.hero .btn:hover {
+  color: #ffffff;
+}
+.hero .active {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+}
+.hero .active:hover {
+  color: #111;
+}

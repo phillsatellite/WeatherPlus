@@ -1,0 +1,130 @@
+/* Hero goes edge-to-edge so the backdrop reaches the viewport edges. */
+.hero {
+  position: relative;
+  width: 100%;
+  /* Pull the hero up so the photo reaches under the iOS notch. */
+  margin-top: calc(-1 * env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  /* Solid color behind the photo so its soft edges don't show the page
+     background. */
+  background-color: #8fb4d9;
+  /* Don't add overflow:hidden - the search dropdown needs to hang below. */
+}
+
+[data-theme='dark'] .hero {
+  background-color: #0f172a;
+}
+
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;  /* don't block clicks */
+  opacity: 0.75;         /* keep text readable */
+}
+
+/* Darken in dark mode so the bright photo doesn't clash. */
+[data-theme='dark'] .heroBackdrop {
+  opacity: 0.5;
+}
+
+/* Extra top padding keeps the headline below the overlay navbar + notch. */
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(32px + 56px + env(safe-area-inset-top)) 16px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.25rem;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+/* Two-line hero headline. */
+.headline {
+  margin-bottom: 16px;
+  line-height: 1.1;
+  /* Shadow so the text reads on top of the photo. */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.headlineTop,
+.headlineBottom {
+  display: block;
+}
+
+.headlineTop {
+  font-size: 1.75rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.headlineBottom {
+  font-size: 2.75rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .headlineTop { font-size: 1.5rem; }
+  .headlineBottom { font-size: 2.25rem; }
+}
+
+/* Use the main text color (not muted) so the subtitle stays readable
+   over the photo. */
+.subtitle {
+  color: #1a1a1a;
+  opacity: 0.9;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='dark'] .subtitle {
+  color: #f1f5f9;
+  opacity: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.searchWrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.errorWrap {
+  max-width: 600px;
+  margin: 24px auto 0;
+}
+
+.section {
+  margin-top: 8px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+[data-theme='dark'] .muted {
+  color: #9ca3af;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}

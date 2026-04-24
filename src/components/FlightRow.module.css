@@ -1,0 +1,154 @@
+/* Grid: 5 info columns + a Details button on the right. */
+.row {
+  display: grid;
+  grid-template-columns: 90px 1.2fr 1fr 120px 100px auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* Details button - filled accent so it stands out. */
+.detailsBtn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s,
+    transform 0.05s;
+}
+.detailsBtn:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4);
+}
+.detailsBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+}
+.detailsBtn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+[data-theme='dark'] .detailsBtn {
+  border-color: #60a5fa;
+  background: #60a5fa;
+}
+[data-theme='dark'] .detailsBtn:hover {
+  background: #93c5fd;
+  border-color: #93c5fd;
+}
+[data-theme='dark'] .detailsBtn:focus-visible {
+  outline-color: #60a5fa;
+}
+
+.flightNumber {
+  font-weight: 600;
+  color: #2563eb;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme='dark'] .flightNumber {
+  color: #60a5fa;
+}
+
+.airline {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .airline {
+  color: #f4f4f5;
+}
+
+/* City name truncates with an ellipsis while the IATA code stays visible
+   on the right. `min-width: 0` is needed to let the text shrink. */
+.to {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  color: #6b7280;
+}
+
+[data-theme='dark'] .to {
+  color: #9ca3af;
+}
+
+.toCity {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.iata {
+  color: #6b7280;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .iata {
+  color: #9ca3af;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+[data-theme='dark'] .time {
+  color: #f4f4f5;
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f7f7f8;
+  color: #6b7280;
+  text-align: center;
+}
+
+[data-theme='dark'] .status {
+  background: #0a0a0b;
+  color: #9ca3af;
+}
+
+.scheduled { background: #ecfdf5;     color: #047857; }
+.active    { background: #dcfce7; color: #15803d; }
+.landed    { background: #f3f4f6;      color: #374151; }
+.cancelled { background: #fef2f2;       color: #b91c1c; }
+.delayed   { background: #fffbeb;     color: #b45309; }
+
+[data-theme='dark'] .scheduled { background: rgba(16, 185, 129, 0.12);     color: #6ee7b7; }
+[data-theme='dark'] .active    { background: rgba(34, 197, 94, 0.16); color: #86efac; }
+[data-theme='dark'] .landed    { background: rgba(148, 163, 184, 0.12);      color: #cbd5e1; }
+[data-theme='dark'] .cancelled { background: rgba(239, 68, 68, 0.14);       color: #fca5a5; }
+[data-theme='dark'] .delayed   { background: rgba(245, 158, 11, 0.14);     color: #fcd34d; }
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 1fr auto;
+    gap: 4px;
+  }
+  /* Mobile layout: flight # + time on top, airline/destination/status
+     below, Details button bottom-right. */
+  .flightNumber { grid-column: 1; grid-row: 1; }
+  .time         { grid-column: 2; grid-row: 1; justify-self: end; }
+  .airline, .to { grid-column: 1 / -1; font-size: 0.8rem; }
+  .status       { grid-column: 1; justify-self: start; }
+  .detailsBtn   { grid-column: 2; justify-self: end; }
+}

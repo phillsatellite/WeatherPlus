@@ -1,0 +1,287 @@
+.form {
+  position: relative;
+  width: 100%;
+}
+
+.inputWrap {
+  display: flex;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s, box-shadow 0.15s, border-radius 0.15s;
+}
+.inputWrap:focus-within {
+  border-color: #2563eb;
+}
+
+[data-theme='dark'] .inputWrap {
+  background: #17171a;
+  border-color: #27272a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+[data-theme='dark'] .inputWrap:focus-within {
+  border-color: #60a5fa;
+}
+
+/* Square the bottom corners when a dropdown is open below, so the two
+   pieces look like one continuous shape. */
+.form:has(.suggestions) .inputWrap {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 8px 12px;
+  color: #1a1a1a;
+  outline: none;
+}
+.input::placeholder {
+  color: #6b7280;
+}
+
+[data-theme='dark'] .input {
+  color: #f4f4f5;
+}
+[data-theme='dark'] .input::placeholder {
+  color: #9ca3af;
+}
+
+.submit {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.submit:hover {
+  background: #1d4ed8;
+}
+
+[data-theme='dark'] .submit {
+  background: #60a5fa;
+}
+[data-theme='dark'] .submit:hover {
+  background: #93c5fd;
+}
+
+/* Sits right below the input with no gap, matching squared corners and
+   no top border so they look like one panel. */
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  margin: 0;
+  padding: 8px;
+  z-index: 5;
+}
+
+[data-theme='dark'] .suggestions {
+  background: #17171a;
+  border-color: #27272a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Reset list styles so items sit flush inside the dropdown. */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* "Searching...", "No airports match...", or an error string. */
+.statusRow {
+  padding: 12px;
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+}
+.statusError {
+  color: #dc2626;
+}
+
+[data-theme='dark'] .statusRow {
+  color: #9ca3af;
+}
+[data-theme='dark'] .statusError {
+  color: #f87171;
+}
+
+.suggestion {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: left;
+  color: #1a1a1a;
+  transition: background 0.1s;
+}
+.suggestion:hover {
+  background: #f7f7f8;
+}
+
+[data-theme='dark'] .suggestion {
+  color: #f4f4f5;
+}
+[data-theme='dark'] .suggestion:hover {
+  background: #0a0a0b;
+}
+
+.iata {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+[data-theme='dark'] .iata {
+  color: #60a5fa;
+}
+
+.city {
+  font-weight: 500;
+}
+
+.country {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+[data-theme='dark'] .country {
+  color: #9ca3af;
+}
+
+.airportName {
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+[data-theme='dark'] .airportName {
+  color: #9ca3af;
+}
+
+/* Recent searches - shown when the input is focused but empty. */
+
+.recentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 4px;
+}
+
+[data-theme='dark'] .recentsHeader {
+  border-bottom-color: #27272a;
+}
+
+.recentsLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+[data-theme='dark'] .recentsLabel {
+  color: #9ca3af;
+}
+
+/* "Clear all" looks like a link, not a button. */
+.clearAll {
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+.clearAll:hover {
+  color: #1a1a1a;
+  background: #f7f7f8;
+}
+
+[data-theme='dark'] .clearAll {
+  color: #9ca3af;
+}
+[data-theme='dark'] .clearAll:hover {
+  color: #f4f4f5;
+  background: #0a0a0b;
+}
+
+.recentsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each row has a button plus an X. The X is positioned absolutely so the
+   main button can still span the whole row. */
+.recentRow {
+  position: relative;
+}
+
+.removeRecent {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+/* Show the X on hover or keyboard focus. */
+.recentRow:hover .removeRecent,
+.removeRecent:focus-visible {
+  opacity: 1;
+}
+.removeRecent:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+[data-theme='dark'] .removeRecent {
+  color: #9ca3af;
+}
+[data-theme='dark'] .removeRecent:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+@media (max-width: 600px) {
+  .airportName { display: none; }
+  /* Always show the X on touch since hover doesn't work. */
+  .removeRecent { opacity: 1; }
+}

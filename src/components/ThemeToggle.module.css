@@ -1,0 +1,27 @@
+.btn {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: #f7f7f8;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn:hover {
+  color: #1a1a1a;
+  border-color: #6b7280;
+}
+
+[data-theme='dark'] .btn {
+  background: #0a0a0b;
+  color: #9ca3af;
+  border-color: #27272a;
+}
+[data-theme='dark'] .btn:hover {
+  color: #f4f4f5;
+  border-color: #9ca3af;
+}

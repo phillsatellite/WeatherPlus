@@ -1,0 +1,96 @@
+.card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.card:hover {
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .card {
+  background: #17171a;
+  border-color: #27272a;
+}
+[data-theme='dark'] .card:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.link {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .link {
+  color: #f4f4f5;
+}
+
+.iata {
+  font-size: 0.75rem;
+  color: #2563eb;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+[data-theme='dark'] .iata {
+  color: #60a5fa;
+}
+
+.city {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.country {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+[data-theme='dark'] .country {
+  color: #9ca3af;
+}
+
+.airportName {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+[data-theme='dark'] .airportName {
+  color: #9ca3af;
+}
+
+.remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+.remove:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+[data-theme='dark'] .remove {
+  color: #9ca3af;
+}
+[data-theme='dark'] .remove:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}

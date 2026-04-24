@@ -1,0 +1,14 @@
+/* Top padding makes room for the overlay navbar + iOS notch. */
+.head {
+  display: flex;
+  justify-content: flex-end;
+  padding: calc(24px + 56px + env(safe-area-inset-top)) 0 16px 0;
+}
+
+.block {
+  margin-bottom: 24px;
+}
+
+.back {
+  margin-top: 16px;
+}

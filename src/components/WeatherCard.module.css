@@ -1,0 +1,204 @@
+/* WeatherCard styles: .hero (photo + big temperature) and .pills (details). */
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+[data-theme='dark'] .card {
+  background: #17171a;
+  border-color: #27272a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero */
+
+.hero {
+  padding: 32px 24px 48px;
+  color: #ffffff;
+  /* Default color in case no mood class matches. */
+  background: #2563eb;
+}
+
+/* One gradient per weather mood. The class is added from WeatherCard.jsx. */
+.clearDay    { background: linear-gradient(to bottom, #60a5fa, #2563eb); }
+.clearNight  { background: linear-gradient(to bottom, #1e293b, #0f172a); }
+.cloudyDay   { background: linear-gradient(to bottom, #94a3b8, #64748b); }
+.cloudyNight { background: linear-gradient(to bottom, #334155, #1e293b); }
+.overcast    { background: linear-gradient(to bottom, #6b7280, #4b5563); }
+.rain        { background: linear-gradient(to bottom, #475569, #334155); }
+.thunder     { background: linear-gradient(to bottom, #312e81, #1e1b4b); }
+.snow        { background: linear-gradient(to bottom, #7dd3fc, #38bdf8); }
+.fog         { background: linear-gradient(to bottom, #9ca3af, #6b7280); }
+
+.heroTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.place {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.country {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.airportName {
+  margin: 2px 0 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.description {
+  margin: 8px 0 0 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: capitalize;
+}
+
+.time {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Big icon + temperature row. */
+.heroCenter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.tempBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.temp {
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.deg {
+  font-weight: 200;
+  margin-left: 2px;
+}
+
+.feels {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+}
+
+.unitToggleSlot {
+  margin-top: 12px;
+}
+
+/* Pills */
+
+.pills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+[data-theme='dark'] .pills {
+  background: #17171a;
+}
+
+.pill {
+  display: grid;
+  gap: 2px;
+  padding: 12px 16px;
+  /* Transparent so pills sit flat against the container color. */
+  background: transparent;
+  border-radius: 8px;
+  min-height: 72px;
+  justify-content: flex-start;
+  align-content: start;
+}
+
+.pillLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .pillLabel {
+  color: #9ca3af;
+}
+
+.pillValue {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+[data-theme='dark'] .pillValue {
+  color: #f4f4f5;
+}
+
+.pillSub {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+[data-theme='dark'] .pillSub {
+  color: #9ca3af;
+}
+
+/* Meta */
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 24px 16px;
+  color: #6b7280;
+  font-size: 0.8rem;
+  background: #ffffff;
+}
+
+[data-theme='dark'] .meta {
+  color: #9ca3af;
+  background: #17171a;
+}
+
+/* Responsive */
+
+@media (max-width: 520px) {
+  .heroCenter {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .tempBlock { align-items: center; }
+  .temp { font-size: 4rem; }
+  .heroTop { flex-direction: column; }
+  .time { margin-top: 4px; }
+}

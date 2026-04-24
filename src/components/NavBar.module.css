@@ -1,0 +1,214 @@
+/* Absolutely positioned so the hero photo can reach the top of the page
+   and the navbar floats on top. Other pages need top padding so their
+   content doesn't sit under it. */
+.bar {
+  background: transparent;
+  border-bottom: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* Extra top padding so nav items clear the iOS notch. */
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Left side - currently just the theme toggle. */
+.leftSlot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* White text + shadow so links stay readable over the hero photo on Home
+   and the weather photo on LocationDetail. No hover/click highlight -
+   keep the color the same in every state. */
+.link,
+.link:hover,
+.link:focus,
+.link:active,
+.link:visited {
+  color: #ffffff;
+}
+
+.link {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.active {
+  font-weight: 600;
+}
+
+/* Bolder when the dropdown is open. */
+.open {
+  font-weight: 600;
+}
+
+/* Greyed out when the user has no favorites yet. */
+.disabled {
+  color: rgba(255, 255, 255, 0.45);
+  cursor: not-allowed;
+}
+.disabled:hover {
+  opacity: 1;
+}
+
+.caret {
+  font-size: 0.7rem;
+  color: inherit;
+}
+
+/* Dropdown */
+
+.dropdownRoot {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 280px;
+  max-width: 340px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 8px;
+  z-index: 20;
+  animation: menuIn 0.12s ease-out;
+}
+
+[data-theme='dark'] .menu {
+  background: #17171a;
+  border-color: #27272a;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+.item:hover {
+  background: #f7f7f8;
+}
+
+[data-theme='dark'] .item:hover {
+  background: #0a0a0b;
+}
+
+.itemMain {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: left;
+  color: #1a1a1a;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+[data-theme='dark'] .itemMain {
+  color: #f4f4f5;
+}
+
+.iata {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+[data-theme='dark'] .iata {
+  color: #60a5fa;
+}
+
+.city {
+  font-weight: 500;
+}
+
+.country {
+  color: #6b7280;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+[data-theme='dark'] .country {
+  color: #9ca3af;
+}
+
+.remove {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  margin-right: 8px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.remove:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+[data-theme='dark'] .remove {
+  color: #9ca3af;
+}
+[data-theme='dark'] .remove:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
