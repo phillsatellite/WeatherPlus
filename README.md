@@ -45,13 +45,6 @@ All four values use the same `useLocalStorage` hook (`src/hooks/useLocalStorage.
 | `weather-unlimited:theme` | `ThemeContext` | `"light"` or `"dark"` | `"light"` |
 | `weather-unlimited:units` | `UnitsContext` | `"C"` or `"F"` | `"F"` |
 
-A few details worth knowing:
-
-- **Recents are deduped on insert.** If you visit an airport you've already searched, it gets pulled to the front of the list rather than appearing twice.
-- **Favorites are deduped too.** Clicking the favorite button on an airport that's already saved is a no-op.
-- **Theme is applied via `data-theme` on `<html>`.** The CSS variables in `index.css` switch based on that attribute, so the value flips the whole UI without re-rendering.
-- **Writes are wrapped in `try/catch`.** Safari private mode throws on `localStorage.setItem`, so the hook silently ignores failures — the app still works, it just won't persist between reloads.
-- **Nothing sensitive is stored.** API keys live in `.env` and never leave the Vite dev server; localStorage only holds UI preferences and airport metadata that's already public.
 ---
 
 ## API endpoints
@@ -244,13 +237,3 @@ Set in **Settings → Environment variables**, scoped to **Production** *and* **
 WEATHERSTACK_KEY=...
 AVIATIONSTACK_KEY=...
 ```
-
-> Heads up: do **not** prefix these with `VITE_`. That would inline them into the browser bundle and defeat the whole point of having a server-side proxy.
-
-### Smoke test after deploy
-
-```bash
-curl "https://your-project.pages.dev/api/weather?query=London"
-```
-
-If you get JSON back, the function is wired up correctly. A 404 means `functions/` is in the wrong place (must be at project root, not under `src/`).
