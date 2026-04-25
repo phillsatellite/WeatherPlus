@@ -35,14 +35,23 @@
   align-items: center;
 }
 
-/* White text + shadow so links stay readable over the hero photo on Home
-   and the weather photo on LocationDetail. No hover/click highlight -
-   keep the color the same in every state. */
+/* Light mode: dark text with a soft white halo so it stays legible whether
+   it's sitting on a white page or on top of a hero photo.
+   Dark mode: white text with a dark halo.
+   No hover/click color change - keep it the same in every state. */
 .link,
 .link:hover,
 .link:focus,
 .link:active,
 .link:visited {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .link,
+[data-theme='dark'] .link:hover,
+[data-theme='dark'] .link:focus,
+[data-theme='dark'] .link:active,
+[data-theme='dark'] .link:visited {
   color: #ffffff;
 }
 
@@ -56,7 +65,11 @@
   background: transparent;
   border: none;
   font-family: inherit;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme='dark'] .link {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 .active {
@@ -70,8 +83,11 @@
 
 /* Greyed out when the user has no favorites yet. */
 .disabled {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed;
+}
+[data-theme='dark'] .disabled {
+  color: rgba(255, 255, 255, 0.45);
 }
 .disabled:hover {
   opacity: 1;

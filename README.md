@@ -11,7 +11,7 @@ A React app that lets you look up live weather and flight info for any major air
 - Weather details: temperature, feels-like, wind speed / direction / bearing, humidity, pressure, cloud cover, precipitation, UV index, visibility, day or night.
 - °C / °F toggle inside the weather card. Your pick is saved to `localStorage`.
 - Two short flight boards per location: 3 departures and 3 arrivals. Each row shows the flight number, airline, partner airport, scheduled time, and status.
-- Click "Details" on a flight for a modal with the full info: aircraft, terminals, codeshares, live tracking if the plane is in the air.
+- Click "Details" on a flight for a modal with the full info: aircraft, terminals, codeshares, scheduled vs actual times.
 - Favorites: one click to save an airport. Saved airports show up in a dropdown in the navbar and persist in `localStorage`.
 - Recent searches show up inside the search dropdown when the input is focused.
 - Home page has 6 suggested airports (JFK, LAX, LHR, HND, DXB, SYD) so you have somewhere to click if you don't know what to search.
@@ -100,6 +100,11 @@ Followed by opening http://localhost:5173/
 ```
 weather-unlimited/
 ├── docs/
+├── functions/
+│   └── api/
+│       ├── weather.js         Cloudflare Pages Function: /api/weather
+│       ├── flights.js         Cloudflare Pages Function: /api/flights
+│       └── airports.js        Cloudflare Pages Function: /api/airports
 ├── public/
 │   └── header.png                      Home hero image
 ├── src/
@@ -193,3 +198,59 @@ curl -s "http://localhost:5173/api/airports?search=London&limit=6" | jq
 # Empty-result path (no airport matches)
 curl -s "http://localhost:5173/api/airports?search=zzzzzzzzz&limit=6" | jq '.data | length'
 ```
+
+---
+
+## Deployment (Cloudflare Pages)
+
+The app is deployed to Cloudflare Pages. Two pieces of infrastructure work together:
+
+- **Static frontend** — `npm run build` produces `dist/`, which Cloudflare's CDN serves globally.
+- **Pages Functions** — every file under `functions/api/*.js` becomes a serverless endpoint at the matching `/api/*` URL. They run on Cloudflare Workers (V8 isolates, not Node) and use standard `Request` / `Response` instead of Node's `req` / `res`.
+
+### Why two proxies (`vite.config.js` and `functions/`)?
+
+| Environment | What handles `/api/*` |
+|---|---|
+| Local dev (`npm run dev`) | Vite's `server.proxy` block in `vite.config.js` |
+| Cloudflare production | The handlers in `functions/api/*.js` |
+
+Both attach the access key on the server side and forward to Weatherstack / Aviationstack. The frontend code is identical in both — it just calls `/api/...` and doesn't know or care which proxy is on the other side.
+
+### Cache headers
+
+Each Pages Function sets `Cache-Control: s-maxage=...` so Cloudflare's edge caches responses globally. Multiple users hitting the same query within the cache window share one upstream call:
+
+| Endpoint | Edge cache | Why |
+|---|---|---|
+| `/api/weather` | 5 min | Weather doesn't change second-to-second |
+| `/api/flights` | 2 min | Flight boards move, but slowly |
+| `/api/airports` | 1 hour | Airport list is essentially static |
+
+This is the main defense against burning through Aviationstack's 100-requests-per-month free tier.
+
+### Build settings (Cloudflare dashboard)
+
+- **Framework preset:** Vite
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- **Root directory:** *(blank)*
+
+### Environment variables
+
+Set in **Settings → Environment variables**, scoped to **Production** *and* **Preview**:
+
+```
+WEATHERSTACK_KEY=...
+AVIATIONSTACK_KEY=...
+```
+
+> Heads up: do **not** prefix these with `VITE_`. That would inline them into the browser bundle and defeat the whole point of having a server-side proxy.
+
+### Smoke test after deploy
+
+```bash
+curl "https://your-project.pages.dev/api/weather?query=London"
+```
+
+If you get JSON back, the function is wired up correctly. A 404 means `functions/` is in the wrong place (must be at project root, not under `src/`).

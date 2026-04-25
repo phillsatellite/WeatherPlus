@@ -4,15 +4,15 @@
   width: 32px;
   height: 32px;
   background: #f7f7f8;
-  color: #6b7280;
-  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
   border-radius: 999px;
   font-size: 0.95rem;
   line-height: 1;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .btn:hover {
-  color: #1a1a1a;
+  color: #000000;
   border-color: #6b7280;
 }
 
