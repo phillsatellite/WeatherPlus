@@ -1,4 +1,4 @@
-# Weather Unlimited
+# WeatherPlus+
 
 A React app that lets you look up live weather and flight info for any major airport. Weather comes from [Weatherstack](https://weatherstack.com), flights and airport search come from [Aviationstack](https://aviationstack.com). You can favorite airports so they show up in a dropdown at the top of the page.
 
